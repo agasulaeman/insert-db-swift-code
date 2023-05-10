@@ -5,7 +5,6 @@ import com.permatabank.insert.swift.bank.connectdb.ConnectDb;
 import java.io.*;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -27,7 +26,7 @@ public class InsertQuery {
             pstmt = conn.connectDatabase().prepareStatement(queryInsert);
 
             LocalDateTime dateTimeNow = LocalDateTime.now();
-            FileInputStream fstream = new FileInputStream("/Users/agasulaeman/downloads/swift_master_202304.txt");
+            FileInputStream fstream = new FileInputStream("/Users/agasulaeman/downloads/swift_master_202304_insert.txt");
             DataInputStream in = new DataInputStream(fstream);
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String strLine;

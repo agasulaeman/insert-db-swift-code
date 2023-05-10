@@ -19,7 +19,7 @@ public class DeleteQuerySwiftBank {
             pstmt.setInt(1, Integer.parseInt(swiftCode));
 
             pstmt.executeUpdate();
-
+            pstmt.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -31,8 +31,8 @@ public class DeleteQuerySwiftBank {
         try {
             PreparedStatement pstmt = connectDb.connectDatabase().prepareStatement(DELETE_ALL_DATA_PMOB_SWIFT_BANK);
 
-            pstmt.execute(DELETE_ALL_DATA_PMOB_SWIFT_BANK);
-
+            pstmt.execute();
+            pstmt.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
