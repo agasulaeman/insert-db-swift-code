@@ -20,7 +20,7 @@ public class MainInsertSwiftCode {
             JobDetail job = JobBuilder.newJob(InsertSwiftBankJob.class)
                     .withIdentity("schedullerjob", "com.permatabank.insert.swift.bank")
                     .build();
-            // Test Define a trigger that repeats every 5 seconds
+            // Test Define a trigger that repeats At 00:00 in every month from January through December.
             CronTrigger trigger = TriggerBuilder.newTrigger()
                     .withIdentity("schedullerjob", "com.permatabank.insert.swift.bank")
                     .withSchedule(CronScheduleBuilder.cronSchedule("0 0 * 1-12 *"))

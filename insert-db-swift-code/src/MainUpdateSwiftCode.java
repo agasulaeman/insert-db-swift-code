@@ -8,7 +8,6 @@ import java.io.IOException;
 
 public class MainUpdateSwiftCode {
     public static void main(String[] args) {
-        UpdateQuery updateQuery = new UpdateQuery();
 
         try {
             SchedulerFactory schedFact = new StdSchedulerFactory();
@@ -18,14 +17,14 @@ public class MainUpdateSwiftCode {
 
             // Define the job and tie it to our MyJob class
             JobDetail job = JobBuilder.newJob(UpdateSwiftBankJob.class)
-                    .withIdentity("schedullerjob", "com.permatabank.insert.swift.bank")
+                    .withIdentity("schedullerjob", "com.permatabank.insert.swift.bank.schedullerjob")
                     .build();
 
-            // Test Define a trigger that repeats every 5 seconds
-            CronTrigger trigger = TriggerBuilder.newTrigger()
-                    .withIdentity("schedullerjob", "com.permatabank.insert.swift.bank")
-                    .withSchedule(CronScheduleBuilder.cronSchedule("0 0 * 1-12 *"))
-                    .forJob("UpdateSwiftBankJob", "com.permatabank.insert.swift.bank.schedullerjob")
+            // Test Define a trigger that repeats every At 00:00 in every month from January through December. 0 0 * 1-12 *
+            Trigger trigger = TriggerBuilder.newTrigger()
+                    .withIdentity("myTrigger", "group1")
+                    .startNow()
+                    .withSchedule(CronScheduleBuilder.monthlyOnDayAndHourAndMinute(10,17,49))
                     .build();
 
             // Tell quartz to schedule the job using our trigger
