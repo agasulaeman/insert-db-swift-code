@@ -5,11 +5,13 @@ import com.permatabank.insert.swift.bank.connectdb.ConnectDb;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Logger;
 
 public class UpdateQuery {
 
-    ConnectDb connectDb = new ConnectDb();
+    private ConnectDb conn = new ConnectDb();
+    final static DateTimeFormatter dbTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH.mm.ss.SSSSSS");
     private void updateDataSwiftBank
             (String swiftCode,
              String bankName,
@@ -20,10 +22,14 @@ public class UpdateQuery {
              String cityName,
              String countryCode,
              String countryName) {
+
         String UPDATE_LIST_BANK_BY_SWIFT_CODE = "UPDATE PMOB.SWIFT_BANK SET BANK_NAME=?,ADDRESS_LINE1=?,ADDRESS_LINE2=?,ADDRESS_LINE3=?,ADDRESS_LINE4=?,CITY_NAME=?,COUNTRY_CODE=?,COUNTRY_NAME=? WHERE SWIFT_CODE =? ";
 
+        int count = 0;
+        PreparedStatement pstmt = null;
+
         try {
-     PreparedStatement pstmt = connectDb.connectDatabase().prepareStatement(UPDATE_LIST_BANK_BY_SWIFT_CODE);
+            pstmt = conn.connectDatabase().prepareStatement(UPDATE_LIST_BANK_BY_SWIFT_CODE);
 
             pstmt.setString(1, bankName);
             pstmt.setString(2, addressLine1);
